@@ -1,12 +1,10 @@
 package ru.avdeev.resourceservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.avdeev.resourceservice.dto.StorageDto;
-import ru.avdeev.resourceservice.entiti.Storage;
 import ru.avdeev.resourceservice.service.StorageService;
 
 import java.util.UUID;

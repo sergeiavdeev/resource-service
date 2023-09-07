@@ -1,7 +1,9 @@
 package ru.avdeev.resourceservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.avdeev.resourceservice.dto.ContactTypeDto;
 import ru.avdeev.resourceservice.mapper.ContactTypeMapper;
@@ -17,8 +19,18 @@ public class ContactTypeServiceImpl implements ContactTypeService {
     private final ContactTypeRepository repository;
     private final ContactTypeMapper mapper;
     @Override
+    @Cacheable(cacheNames = "contact-type")
     public Mono<ContactTypeDto> getById(UUID id) {
         return repository.findById(id)
-                .map(mapper::toDto);
+                .map(mapper::toDto)
+                .cache();
+    }
+
+    @Override
+    @Cacheable(cacheNames = "contact-type")
+    public Flux<ContactTypeDto> getAll() {
+        return repository.findAll()
+                .map(mapper::toDto)
+                .cache();
     }
 }
