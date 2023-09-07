@@ -1,5 +1,6 @@
 package ru.avdeev.resourceservice.entiti.callback;
 
+import lombok.NonNull;
 import org.reactivestreams.Publisher;
 import org.springframework.data.r2dbc.mapping.OutboundRow;
 import org.springframework.data.r2dbc.mapping.event.BeforeSaveCallback;
@@ -14,7 +15,8 @@ import java.util.UUID;
 @Component
 public class ContactBeforeSave implements BeforeSaveCallback<Contact> {
     @Override
-    public Publisher<Contact> onBeforeSave(Contact entity, OutboundRow row, SqlIdentifier table) {
+    @NonNull
+    public Publisher<Contact> onBeforeSave(Contact entity, @NonNull OutboundRow row, @NonNull SqlIdentifier table) {
         if (entity.id() == null) {
             row.put("id", Parameter.from(UUID.randomUUID()));
         }

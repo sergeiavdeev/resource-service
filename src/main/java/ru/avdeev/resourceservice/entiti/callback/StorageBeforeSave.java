@@ -8,9 +8,7 @@ import org.springframework.data.relational.core.sql.SqlIdentifier;
 import org.springframework.r2dbc.core.Parameter;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-
 import ru.avdeev.resourceservice.entiti.Storage;
-
 import java.util.UUID;
 
 @Component
