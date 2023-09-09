@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.avdeev.resourceservice.dto.Error;
 import ru.avdeev.resourceservice.exception.ApiException;
-import ru.avdeev.resourceservice.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 @Log
