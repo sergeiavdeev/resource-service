@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.avdeev.resourceservice.dto.ContactTypeDto;
+import ru.avdeev.resourceservice.exception.ResourceNotFoundException;
 import ru.avdeev.resourceservice.mapper.ContactTypeMapper;
 import ru.avdeev.resourceservice.repository.ContactTypeRepository;
 import ru.avdeev.resourceservice.service.ContactTypeService;
@@ -22,6 +23,9 @@ public class ContactTypeServiceImpl implements ContactTypeService {
     @Cacheable(cacheNames = "contact-type")
     public Mono<ContactTypeDto> getById(UUID id) {
         return repository.findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ResourceNotFoundException("Contact type id: %s not found!", id))
+                )
                 .map(mapper::toDto)
                 .cache();
     }

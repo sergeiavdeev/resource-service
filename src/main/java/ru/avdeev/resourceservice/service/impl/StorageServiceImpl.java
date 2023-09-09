@@ -35,7 +35,7 @@ public class StorageServiceImpl implements StorageService {
     public Mono<StorageDto> getById(UUID id) {
         return repository
                 .findById(id)
-                .switchIfEmpty(Mono.error(new ResourceNotFoundException(String.format("Storage id: %s not found", id))))
+                .switchIfEmpty(Mono.error(new ResourceNotFoundException("Storage id: %s not found", id)))
                 .map(storageMapper::toDto)
                 .flatMap(this::setContacts)
                 .flatMap(this::setResources)

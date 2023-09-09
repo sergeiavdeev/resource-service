@@ -1,17 +1,15 @@
 package ru.avdeev.resourceservice.exception;
 
 import io.netty.handler.codec.http.HttpResponseStatus;
+import lombok.Getter;
 
+@Getter
 public class ApiException extends RuntimeException {
 
-    public HttpResponseStatus getHttpStatus() {
-        return httpStatus;
-    }
+    private final HttpResponseStatus httpStatus;
 
-    protected HttpResponseStatus httpStatus;
-
-    public ApiException(HttpResponseStatus httpStatus, String message) {
-        super(message);
+    public ApiException(HttpResponseStatus httpStatus, String message, Object... args) {
+        super(String.format(message, args));
         this.httpStatus = httpStatus;
     }
 }
