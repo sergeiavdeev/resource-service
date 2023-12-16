@@ -2,7 +2,6 @@ package ru.avdeev.resourceservice.mapper;
 
 import org.mapstruct.*;
 import ru.avdeev.resourceservice.dto.ContactDto;
-import ru.avdeev.resourceservice.dto.ContactTypeDto;
 import ru.avdeev.resourceservice.entiti.Contact;
 
 import java.util.UUID;

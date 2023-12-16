@@ -6,8 +6,3 @@ spring:
   cloud:
     config:
       fail-fast: true
-logging:
-  level:
-    io.r2dbc.postgresql.QUERY: DEBUG
-    io.r2dbc.postgresql.PARAM: DEBUG
-    org.springframework.web.reactive: DEBUG

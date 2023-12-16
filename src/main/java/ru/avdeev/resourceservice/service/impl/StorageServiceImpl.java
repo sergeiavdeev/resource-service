@@ -44,7 +44,8 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     @Transactional
-    public Mono<StorageDto> add(StorageDto storage) {
+    public Mono<StorageDto> add(StorageDto storage, UUID userId) {
+        storage.setOwner(userId);
         return repository.save(storageMapper.toEntity(storage))
                 .map(storageMapper::toDto)
                 .map(storageDto -> {
@@ -59,10 +60,10 @@ public class StorageServiceImpl implements StorageService {
     @Override
     @Transactional
     @CacheEvict(cacheNames = "storage", key = "#storage.getId()")
-    public Mono<StorageDto> update(StorageDto storage) {
+    public Mono<StorageDto> update(StorageDto storage, UUID userId) {
         return contactService.deleteByOwner(storage.getId())
                 .then(resourceService.deleteByStorage(storage.getId()))
-                .then(add(storage));
+                .then(add(storage, userId));
     }
 
     @Override

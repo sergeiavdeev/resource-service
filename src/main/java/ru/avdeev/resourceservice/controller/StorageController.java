@@ -1,6 +1,8 @@
 package ru.avdeev.resourceservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -27,12 +29,14 @@ public class StorageController {
     }
 
     @PostMapping("")
-    public Mono<StorageDto> add(@RequestBody StorageDto storage) {
-        return service.add(storage);
+    public Mono<StorageDto> add(@RequestBody StorageDto storage, @AuthenticationPrincipal Jwt jwt) {
+        UUID userId = UUID.fromString(jwt.getClaim("sub").toString());
+        return service.add(storage, userId);
     }
 
     @PatchMapping("")
-    public Mono<StorageDto> update(@RequestBody StorageDto storage) {
-        return service.update(storage);
+    public Mono<StorageDto> update(@RequestBody StorageDto storage,  @AuthenticationPrincipal Jwt jwt) {
+        UUID userId = UUID.fromString(jwt.getClaim("sub").toString());
+        return service.update(storage, userId);
     }
 }
