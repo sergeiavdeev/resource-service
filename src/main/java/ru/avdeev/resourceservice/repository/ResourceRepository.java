@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface ResourceRepository extends ReactiveCrudRepository<Resource, UUID> {
     Flux<Resource> findAllByStorage(UUID storageId);
     Mono<Void> deleteAllByStorage(UUID storageId);
+    Mono<Resource> getById(UUID id);
 }

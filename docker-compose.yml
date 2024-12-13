@@ -2,9 +2,10 @@ version: "3.9"
 services:
   resource-service:
     build: .
-    image: sergeiavdeev/resource-service
+    image: sergeiavdeev/resource-service:${TAG}
     container_name: resource-service
     command: java -jar resource-service-0.0.1-SNAPSHOT.jar
+    restart: always
     environment:
       spring.profiles.active: ${PROFILE}
     networks:

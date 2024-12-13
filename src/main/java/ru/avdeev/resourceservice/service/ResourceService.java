@@ -15,4 +15,6 @@ public interface ResourceService {
     Flux<ResourceDto> add(List<ResourceDto> contacts);
 
     Mono<Void> deleteByStorage(UUID storageId);
+
+    Mono<ResourceDto> getById(UUID id);
 }

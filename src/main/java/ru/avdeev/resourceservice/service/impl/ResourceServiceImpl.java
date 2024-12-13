@@ -37,4 +37,10 @@ public class ResourceServiceImpl implements ResourceService {
         return repository.deleteAllByStorage(storageId);
     }
 
+    @Override
+    public Mono<ResourceDto> getById(UUID id) {
+        return repository.getById(id)
+                .map(mapper::toDto);
+    }
+
 }
