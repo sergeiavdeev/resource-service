@@ -4,8 +4,6 @@ import org.mapstruct.*;
 import ru.avdeev.resourceservice.dto.ContactDto;
 import ru.avdeev.resourceservice.entiti.Contact;
 
-import java.util.UUID;
-
 @Mapper(componentModel = "spring")
 public interface ContactMapper {
 

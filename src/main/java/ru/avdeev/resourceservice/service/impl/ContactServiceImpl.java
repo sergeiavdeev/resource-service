@@ -1,6 +1,5 @@
 package ru.avdeev.resourceservice.service.impl;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -29,7 +28,6 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    @CircuitBreaker(name = "CONTACT_SERVICE")
     public Flux<ContactDto> getByOwner(UUID ownerId) {
         return repository.findAllByOwner(ownerId)
                 .flatMap(this::setType);

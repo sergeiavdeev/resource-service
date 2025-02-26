@@ -1,6 +1,5 @@
 package ru.avdeev.resourceservice.service.impl;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -33,16 +32,10 @@ public class ContactTypeServiceImpl implements ContactTypeService {
 
     @Override
     @Cacheable(cacheNames = "contact-type")
-    @CircuitBreaker(name = "CONTACT_TYPE_SERVICE", fallbackMethod = "fallback")
     public Flux<ContactTypeDto> getAll() {
         return repository.findAll()
                 .map(mapper::toDto)
                 .cache()
                 ;
-    }
-
-    public Flux<ContactTypeDto> fallback(Throwable e) {
-
-        return Flux.empty();
     }
 }

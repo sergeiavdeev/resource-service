@@ -1,3 +1,5 @@
+
+
 CREATE TABLE storage (
 
     id uuid NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
